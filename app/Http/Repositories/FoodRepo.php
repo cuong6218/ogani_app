@@ -24,12 +24,15 @@ class FoodRepo
     {
         $food->save();
     }
-    public function getfood($id)
+    public function getFood($id)
     {
         return $this->food->findOrFail($id);
     }
     public function destroy($id)
     {
         $this->food->destroy($id);
+    }
+    public function getByCateId($id){
+        return $this->food->where("cate_id", "=", $id);
     }
 }

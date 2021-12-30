@@ -59,4 +59,7 @@ class FoodService
     {
         $this->foodRepo->destroy($id);
     }
+    public function getByCateId($id) {
+        return $this->foodRepo->getByCateId($id);
+    }
 }

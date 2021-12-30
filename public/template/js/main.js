@@ -99,7 +99,9 @@
     $('.hero__categories__all').on('click', function(){
         $('.hero__categories ul').slideToggle(400);
     });
-
+    $('.hero__search__form').on('click', function(){
+        $('.hero__search__categories ul').slideToggle(400);
+    });
     /*--------------------------
         Latest Product Slider
     ----------------------------*/
@@ -222,3 +224,8 @@
     });
 
 })(jQuery);
+$("document").ready(function(){
+    setTimeout(function(){
+       $("div#alert-message").remove();
+    }, 3000 ); // 5 secs
+});

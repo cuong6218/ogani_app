@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateOrderRequest;
+use App\Http\Services\FlashMessage;
 use App\Http\Services\OrderService;
 class OrderController extends Controller
 {
@@ -24,9 +25,14 @@ class OrderController extends Controller
      */
     public function store(CreateOrderRequest $request)
     {
-        $this->orderService->store($request);
-        $request->session()->remove('cart.foods');
-        $request->session()->remove('cart.total_price');
+        if($request->session()->get('cart.foods') != null){
+            $this->orderService->store($request);
+            $request->session()->remove('cart.foods');
+            $request->session()->remove('cart.total_price');
+            (new FlashMessage)->_notifyMsg($request, "You place order success!", "success" );
+        } else {
+            (new FlashMessage)->_notifyMsg($request, "Please choose your foods!", "error" );
+        }
         return redirect()->route('ogani.index');
     }
     public function updatePending($id){

@@ -32,4 +32,7 @@ class CategoryRepo
     {
         $this->category->destroy($id);
     }
+    public function getByName($name) {
+        return $this->category->where("name", $name)->get();
+    }
 }

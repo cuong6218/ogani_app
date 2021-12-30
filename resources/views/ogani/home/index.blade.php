@@ -59,16 +59,18 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix {{$food->category->name}}">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="{{asset('storage/'.$food->image_url)}}">
+                        
                         <form id="add-to-cart" action="{{Route('cart.add-to-cart')}}" method="POST">
                             @csrf
                             <input type="hidden" name="id" value="{{$food->id}}" />
-                        
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                            
                             <li><a role="button" onclick="document.getElementById('add-to-cart').submit()" type="submit"><i class="fa fa-shopping-cart"></i></a></li>
+                        
                         </ul>
-                        </form>
+                    </form>
                     </div>
                     <div class="featured__item__text">
                         <h6><a href="#">{{$food->name}}</a></h6>

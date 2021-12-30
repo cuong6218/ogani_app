@@ -110,6 +110,17 @@
             </div>
         </div>
     </div>
+    @if(Session::get("error"))
+    <div class="alert alert-danger" id="alert-message">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{Session::get("error")}}
+    </div>
+    @elseif(Session::get("success"))
+    <div class="alert alert-success" id="alert-message">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{Session::get("success")}}
+    </div>
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -153,7 +164,7 @@
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
-<section class="hero @if(\Request::route()->getName() == 'cart.list') hero-normal @endif">
+<section class="hero @if(\Request::route()->getName() == 'cart.list' || \Request::route()->getName() == 'ogani.search') hero-normal @endif">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -180,12 +191,13 @@
             <div class="col-lg-9">
                 <div class="hero__search">
                     <div class="hero__search__form">
-                        <form action="#">
+                        <form action="{{Route('ogani.search')}}" method="POST">
+                            @csrf
                             <div class="hero__search__categories">
                                 All Categories
                                 <span class="arrow_carrot-down"></span>
                             </div>
-                            <input type="text" placeholder="What do yo u need?">
+                            <input type="text" name="name" placeholder="What do yo u need?">
                             <button type="submit" class="site-btn">SEARCH</button>
                         </form>
                     </div>
@@ -199,7 +211,7 @@
                         </div>
                     </div>
                 </div>
-                @if(\Request::route()->getName() != 'cart.list')
+                @if(\Request::route()->getName() != 'cart.list' && \Request::route()->getName() != 'ogani.search')
                 <div class="hero__item set-bg" data-setbg="template/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>FRUIT FRESH</span>

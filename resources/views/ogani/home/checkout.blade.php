@@ -21,12 +21,12 @@
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-lg-12">
                     <h6><span class="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
                     </h6>
                 </div>
-            </div>
+            </div> --}}
             <div class="checkout__form">
                 <h4>Billing Details</h4>
                 <form action="{{Route('order.store')}}" method="POST">
@@ -36,27 +36,29 @@
                     @if(Auth::user() != null)
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}"/>
                     @endif
+                    
                     <div class="row">
+
                         <div class="col-lg-8 col-md-6">
                             <div class="checkout__input">
                                 <p>Fullname<span>*</span></p>
-                                <input name="name" type="text" placeholder="Fullname" @if(Auth::user() != null) value="{{Auth::user()->name}}" disabled @endif class="checkout__input__add">
+                                <input name="name" type="text" placeholder="Fullname" value="{{Auth::user()->name}}" disabled class="checkout__input__add">
                             </div>
                             <div class="checkout__input">
                                 <p>Address<span>*</span></p>
-                                <input name="address" type="text" placeholder="Street Address" @if(Auth::user() != null) value="{{Auth::user()->address}}" disabled @endif class="checkout__input__add">
+                                <input name="address" type="text" placeholder="Street Address" value="{{Auth::user()->address}}" disabled  class="checkout__input__add">
                             </div>
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Phone<span>*</span></p>
-                                        <input name="phone" @if(Auth::user() != null) value="0{{Auth::user()->phone}}" disabled @endif type="text">
+                                        <input name="phone" value="{{formatPhoneNumber(Auth::user()->phone)}}" disabled  type="text">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="checkout__input">
                                         <p>Email<span>*</span></p>
-                                        <input type="text" @if(Auth::user() != null) value="{{Auth::user()->email}}" disabled @endif>
+                                        <input type="text" value="{{Auth::user()->email}}" disabled >
                                     </div>
                                 </div>
                             </div>
@@ -66,6 +68,7 @@
                                     placeholder="Notes about your order, e.g. special notes for delivery.">
                             </div>
                         </div>
+
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Your Order</h4>

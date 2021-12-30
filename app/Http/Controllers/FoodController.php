@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateFoodRequest;
 use App\Http\Services\CategoryService;
 use App\Http\Services\FoodService;
+use App\Models\Food;
 use Illuminate\Support\Facades\Session;
 
 class FoodController extends Controller

@@ -43,4 +43,7 @@ class CategoryService
     {
         $this->cateRepo->destroy($id);
     }
+    public function getByName($name) {
+        return $this->cateRepo->getByName($name);
+    }
 }

@@ -33,6 +33,7 @@ Route::prefix('/ogani')->group(function()
         Route::get('/shop-grid', 'App\Http\Controllers\OganiController@shopGrid')->name('ogani.shop-grid');
         Route::get('/blog', 'App\Http\Controllers\OganiController@blog')->name('ogani.blog');
         Route::get('/contact', 'App\Http\Controllers\OganiController@contact')->name('ogani.contact');
+        Route::post('/search', 'App\Http\Controllers\OganiController@search')->name('ogani.search');
     });
 Route::prefix('/dashboard')->group(function()
 {
@@ -58,8 +59,8 @@ Route::prefix('/food')->group(function()
 });
 Route::prefix('/checkout')->group(function()
 {
-    Route::get('/list', 'App\Http\Controllers\CartController@list')->name('cart.list');
-    Route::post('/add', 'App\Http\Controllers\CartController@addToCart')->name('cart.add-to-cart');
+    Route::get('/list', 'App\Http\Controllers\CartController@list')->name('cart.list')->middleware('auth');
+    Route::post('/add', 'App\Http\Controllers\CartController@addToCart')->name('cart.add-to-cart')->middleware('auth');
     Route::get('/clear', 'App\Http\Controllers\CartController@clear')->name('cart.clear');
 });
 
