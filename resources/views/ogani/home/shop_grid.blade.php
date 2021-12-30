@@ -28,19 +28,12 @@
                     <div class="sidebar__item">
                         <h4>Department</h4>
                         <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
+                            @foreach($categories_header as $category)
+                            <li><a href="{{Route('category.show', $category->id)}}">{{$category->name}}</a></li>
+                            @endforeach 
                         </ul>
                     </div>
-                    <div class="sidebar__item">
+                    {{-- <div class="sidebar__item">
                         <h4>Price</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
@@ -122,7 +115,7 @@
                                 <input type="radio" id="tiny">
                             </label>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="sidebar__item">
                         <div class="latest-product__text">
                             <h4>Latest Products</h4>
@@ -205,7 +198,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>{{count($foods?? [])}}</span> Products found</h6>
+                                <h6><span>{{$foods->total()}}</span> Products found</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
@@ -217,20 +210,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach($foods?? [] as $food)
+                    @foreach($foods->items()?? [] as $food)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
-                            <div class="product__item__pic set-bg" data-setbg="template/img/product/product-1.jpg">
-                                <form id="add-to-cart" action="{{Route('cart.add-to-cart')}}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{$food->id}}" />
+                            <div class="product__item__pic set-bg" data-setbg="{{asset('storage/'.$food->image_url)}}">
                                 <ul class="product__item__pic__hover">
                                     <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                     <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                                    <li><a role="button" onclick="document.getElementById('add-to-cart').submit()" type="submit">
+                                    <li><a href="{{Route('cart.add-to-cart', $food->id)}}">
                                         <i class="fa fa-shopping-cart"></i></a></li>
                                 </ul>
-                                </form>
+                               
                             </div>
                             <div class="product__item__text">
                                 <h6><a href="#">{{$food->food_name}}</a></h6>
@@ -242,10 +232,11 @@
                 
                 </div>
                 <div class="product__pagination">
-                    <a href="#">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                    <a @if($foods->onFirstPage()) class="disabled" @endif href="{{$foods->previousPageUrl()}}"><i class="fa fa-long-arrow-left"></i></a>
+                    @foreach($foods->getUrlRange(1,$foods->lastPage()) as $page_number => $page_url)
+                    <a href="{{$page_url}}">{{$page_number}}</a>
+                    @endforeach                  
+                    <a @if($foods->currentPage() == $foods->lastPage()) class="disabled" @endif href="{{$foods->nextPageUrl();}}" ><i class="fa fa-long-arrow-right"></i></a>
                 </div>
             </div>
         </div>

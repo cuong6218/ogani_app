@@ -14,9 +14,9 @@ class CategoryService
     {
         $this->cateRepo = $cateRepo;
     }
-    public function getAll()
+    public function getAll($item_number = 5)
     {
-        return $this->cateRepo->getAll();
+        return $this->cateRepo->getAll($item_number);
     }
     public function all()
     {

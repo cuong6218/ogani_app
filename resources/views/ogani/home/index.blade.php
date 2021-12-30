@@ -5,31 +5,13 @@
     <div class="container">
         <div class="row">
             <div class="categories__slider owl-carousel">
+                @foreach($categories_header as $category)
                 <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-1.jpg">
-                        <h5><a href="#">Fresh Fruit</a></h5>
+                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-{{rand(1,5)}}.jpg">
+                        <h5><a href="{{Route('category.show', $category->id)}}">{{$category->name}}</a></h5>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-2.jpg">
-                        <h5><a href="#">Dried Fruit</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-3.jpg">
-                        <h5><a href="#">Vegetables</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-4.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="categories__item set-bg" data-setbg="template/img/categories/cat-5.jpg">
-                        <h5><a href="#">drink fruits</a></h5>
-                    </div>
-                </div>
+                @endforeach 
             </div>
         </div>
     </div>
@@ -59,18 +41,13 @@
             <div class="col-lg-3 col-md-4 col-sm-6 mix {{$food->category->name}}">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg" data-setbg="{{asset('storage/'.$food->image_url)}}">
-                        
-                        <form id="add-to-cart" action="{{Route('cart.add-to-cart')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$food->id}}" />
                         <ul class="featured__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
                             
-                            <li><a role="button" onclick="document.getElementById('add-to-cart').submit()" type="submit"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a href="{{Route('cart.add-to-cart', $food->id)}}"><i class="fa fa-shopping-cart"></i></a></li>
                         
                         </ul>
-                    </form>
                     </div>
                     <div class="featured__item__text">
                         <h6><a href="#">{{$food->name}}</a></h6>

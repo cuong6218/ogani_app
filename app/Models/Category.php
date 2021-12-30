@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\CategoryFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 class Category extends Model
@@ -14,5 +15,8 @@ class Category extends Model
     public function foods()
     {
         return $this->hasMany(Food::class);
+    }
+    protected static function factory() {
+        return CategoryFactory::new();
     }
 }

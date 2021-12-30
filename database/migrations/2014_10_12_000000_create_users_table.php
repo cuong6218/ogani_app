@@ -18,7 +18,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password')->default("");
+            $table->string('gitub_id')->default("");
+            $table->string('gitub_token')->default("");
+            $table->string('gitub_refresh_token')->default("");
+            $table->string('google_token')->default("");
+            $table->string('google_refresh_token')->default("");
             $table->rememberToken();
             $table->timestamps();
         });

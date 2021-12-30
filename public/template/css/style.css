@@ -3484,3 +3484,7 @@ ol {
     z-index:1000; 
     border-radius:0px
   }
+  a.disabled {
+	pointer-events: none;
+	cursor: default;
+  }

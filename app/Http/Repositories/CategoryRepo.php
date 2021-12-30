@@ -12,9 +12,9 @@ class CategoryRepo
     {
         $this->category = $category;
     }
-    public function getAll()
+    public function getAll($item_number)
     {
-        return $this->category->select('*')->orderBy('id', 'desc')->paginate(5);
+        return $this->category->select('*')->orderBy('id', 'desc')->paginate($item_number);
     }
     public function all()
     {

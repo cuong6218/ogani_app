@@ -14,7 +14,7 @@ class FoodRepo
     }
     public function getAll()
     {
-        return $this->food->select('*')->orderBy('id', 'desc')->paginate(5);
+        return $this->food->select('*')->orderBy('id', 'desc')->paginate(8);
     }
     public function all()
     {
@@ -32,7 +32,14 @@ class FoodRepo
     {
         $this->food->destroy($id);
     }
+    public function searchCategoryOrFood($name) {
+        return $this->food->select('foods.id', 'foods.name as food_name', 'foods.image_url', 'foods.price', 'categories.name as cate_name')->join('categories', function ($join){
+            $join->on('foods.cate_id', '=', 'categories.id');
+        })->where('categories.name', 'like', '%'.$name.'%')
+        ->orWhere('foods.name', 'like', '%'.$name.'%')->paginate(6);
+    }
     public function getByCateId($id){
-        return $this->food->where("cate_id", "=", $id);
+        return $this->food->select('foods.id', 'foods.name', 'foods.image_url', 'foods.price')
+                            ->where('cate_id', '=', $id)->paginate(6);
     }
 }

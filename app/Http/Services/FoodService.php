@@ -59,6 +59,9 @@ class FoodService
     {
         $this->foodRepo->destroy($id);
     }
+    public function searchCategoryOrFood(Request $request) {
+        return $this->foodRepo->searchCategoryOrFood($request->name);
+    }
     public function getByCateId($id) {
         return $this->foodRepo->getByCateId($id);
     }

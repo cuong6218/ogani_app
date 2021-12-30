@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Services\CategoryService;
+use App\Http\Services\FoodService;
 use App\Notifications\InvoicePaid;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
@@ -11,9 +12,11 @@ use Illuminate\Support\Facades\Session;
 class CategoryController extends Controller
 {
     protected $categoryService;
-    public function __construct(CategoryService $categoryService)
+    public function __construct(CategoryService $categoryService,
+                                FoodService $foodService)
     {
         $this->categoryService = $categoryService;
+        $this->foodService = $foodService;
     }
     /**
      * Display a listing of the resource.
@@ -57,7 +60,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $foods = $this->foodService->getByCateId($id);
+        return view('ogani.home.shop_grid', compact('foods'));
     }
 
     /**

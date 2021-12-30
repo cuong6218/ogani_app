@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\FlashMessage;
 use App\Http\Services\FoodService;
 use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -18,14 +19,10 @@ class CartController extends Controller
         }
         return view('ogani.home.checkout', compact('cart'));
     }
-    public function addToCart(HttpRequest $request) {
-        $food = $this->foodService->getFood($request->id);
+    public function addToCart(HttpRequest $request, $id, $quanty = 1) {
+        $food = $this->foodService->getFood($id);
         $request->session()->push('cart.foods', $food);
-        if ($request->quanty){
-            $total_price = $food->price*$request->quanty;
-        } else {
-            $total_price = $food->price;
-        }
+        $total_price = $food->price*$quanty;
         $request->session()->increment('cart.total_price', $total_price);
         (new FlashMessage)->_notifyMsg($request, "Add to cart success!");
         return back();

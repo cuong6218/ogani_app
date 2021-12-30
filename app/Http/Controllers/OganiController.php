@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Services\FoodService;
 use App\Http\Services\CategoryService;
 use App\Http\Services\FlashMessage;
+use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\DB;
@@ -20,7 +21,8 @@ class OganiController extends BaseController
     public function index() {
         $foods = $this->foodService->getAll();
         $categories = $this->categoryService->getAll();
-        return view('ogani.home.index', compact('foods', 'categories'));
+        $categories_header = $this->categoryService->getAll(10);
+        return view('ogani.home.index', compact('foods', 'categories', 'categories_header'));
     }
     
     public function shopGrid() {
@@ -34,11 +36,8 @@ class OganiController extends BaseController
     }
     public function search(Request $request){
         if ($request->name){
-            $foods = DB::table('foods')->select('foods.name as food_name', 'foods.id', 'foods.price', 'categories.name as cate_name')->join('categories', function ($join){
-                $join->on('foods.cate_id', '=', 'categories.id');
-            })->where('categories.name', 'like', '%'.$request->name.'%')
-            ->orWhere('foods.name', 'like', '%'.$request->name.'%')->get();
-            
+            $foods = $this->foodService->searchCategoryOrFood($request);
+            $foods->appends(['name' => $request->name]);
             return view('ogani.home.shop_grid', compact('foods'));
         }
         (new FlashMessage)->_notifyMsg($request, "Type your keyword!", "error");
