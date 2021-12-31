@@ -40,7 +40,7 @@ class OganiController extends BaseController
             $foods->appends(['name' => $request->name]);
             return view('ogani.home.shop_grid', compact('foods'));
         }
-        (new FlashMessage)->_notifyMsg($request, "Type your keyword!", "error");
+        (new FlashMessage)->notifyMsg($request, "Type your keyword!", "error");
         return redirect()->route('ogani.index');
     }
 }

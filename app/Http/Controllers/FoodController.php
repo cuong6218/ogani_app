@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateFoodRequest;
 use App\Http\Services\CategoryService;
+use App\Http\Services\FlashMessage;
 use App\Http\Services\FoodService;
 use App\Models\Food;
 use Illuminate\Support\Facades\Session;
@@ -48,7 +49,7 @@ class FoodController extends Controller
     public function store(CreateFoodRequest $request)
     {
         $this->foodService->store($request);
-        Session::flash('success', 'Create food success!');
+        (new FlashMessage)->notifyMsg($request, "Create food infos success!");
         return redirect()->route('food.index');
     }
 
@@ -86,7 +87,7 @@ class FoodController extends Controller
     public function update(CreateFoodRequest $request, $id)
     {
         $this->foodService->update($request, $id);
-        Session::flash('success', 'Update food success!');
+        (new FlashMessage)->notifyMsg($request, "Update food infos success!");
         return redirect()->route('food.index');
     }
 

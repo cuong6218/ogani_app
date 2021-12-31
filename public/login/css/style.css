@@ -8321,3 +8321,11 @@ h1, h2, h3, h4, h5,
         border: 1px solid transparent;
         background: #a0c334;
         color: #fff; }
+  #alert-message {
+    position:fixed;
+      top: 55px; 
+      right: 10px; 
+      width: 30%;
+      z-index:1000; 
+      border-radius:0px
+    }

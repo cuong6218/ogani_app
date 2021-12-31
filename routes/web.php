@@ -16,16 +16,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::prefix('/customer')->group(function()
+Route::prefix('/user')->group(function()
 {
-    Route::get('/', 'App\Http\Controllers\CustomerController@showLogin')->name('customer.showLogin');
-    Route::get('/register', 'App\Http\Controllers\CustomerController@showRegister')->name('customer.showRegister');
-    Route::post('/store', 'App\Http\Controllers\CustomerController@register')->name('customer.register');
-    Route::post('/login', 'App\Http\Controllers\CustomerController@login')->name('customer.login');
-    Route::get('/logout', 'App\Http\Controllers\CustomerController@logout')->name('customer.logout');
-    Route::get('/{drive}/login-oauth', 'App\Http\Controllers\CustomerController@loginOauth')->name('customer.loginoauth');
-    Route::get('/{drive}/callback', 'App\Http\Controllers\CustomerController@callback')->name('customer.callback');
-Route::get('/list', 'App\Http\Controllers\CustomerController@index')->name('customer.index');
+    Route::get('/', 'App\Http\Controllers\UserController@showLogin')->name('user.showLogin');
+    Route::get('/register', 'App\Http\Controllers\UserController@showRegister')->name('user.showRegister');
+    Route::post('/store', 'App\Http\Controllers\UserController@register')->name('user.register');
+    Route::post('/login', 'App\Http\Controllers\UserController@login')->name('user.login');
+    Route::get('/logout', 'App\Http\Controllers\UserController@logout')->name('user.logout');
+    Route::get('/{drive}/login-oauth', 'App\Http\Controllers\UserController@loginOauth')->name('user.loginoauth');
+    Route::get('/{drive}/callback', 'App\Http\Controllers\UserController@callback')->name('user.callback');
+Route::get('/list', 'App\Http\Controllers\UserController@index')->name('user.index');
 });
 Route::prefix('/ogani')->group(function()
     {

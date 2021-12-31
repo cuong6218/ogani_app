@@ -27,7 +27,7 @@
             </ul>
         </div>
         <div class="header__top__right__auth">
-            <a href="{{Route('customer.showLogin')}}"><i class="fa fa-user"></i> Login</a>
+            <a href="{{Route('user.showLogin')}}"><i class="fa fa-user"></i> Login</a>
         </div>
     </div>
     <nav class="humberger__menu__nav mobile-menu">
@@ -97,10 +97,10 @@
                             <div>{{Auth::user()->email }}</div>
                             <span class="arrow_carrot-down"></span>
                             <ul>
-                                <li><a href="{{Route('customer.logout')}}">Logout</a></li>
+                                <li><a href="{{Route('user.logout')}}">Logout</a></li>
                             </ul>    
                             @else
-                                <a href="{{Route('customer.showLogin')}}"><i class="fa fa-user"></i> Login</a>
+                                <a href="{{Route('user.showLogin')}}"><i class="fa fa-user"></i> Login</a>
                             @endif
                         </div>
                         {{-- <div class="header__top__right__auth">

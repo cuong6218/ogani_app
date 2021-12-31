@@ -16,6 +16,12 @@
 
 <body>
     <section class="ftco-section">
+        @if(Session::has("success"))
+        <div class="alert alert-success" id="alert-message">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{Session::get("success")}}
+        </div>
+        @endif
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
@@ -31,23 +37,30 @@
                             </div>
                             <div class="w-100">
 								<p class="social-media d-flex justify-content-end">
-									<a href="{{Route('customer.loginoauth', 'github')}}" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-github"></span></a>
-									<a href="{{Route('customer.loginoauth', 'google')}}" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google-plus"></span></a>
+									<a href="{{Route('user.loginoauth', 'github')}}" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-github"></span></a>
+									<a href="{{Route('user.loginoauth', 'google')}}" class="social-icon d-flex align-items-center justify-content-center"><span class="fa fa-google-plus"></span></a>
 								</p>
 							</div>
                         </div>
-                        <form action="{{Route('customer.login')}}" method="POST" class="login-form">
+                        <form action="{{Route('user.login')}}" method="POST" class="login-form">
                             @csrf
                             <div class="form-group">
                                 <div class="icon d-flex align-items-center justify-content-center"><span
                                         class="fa fa-envelope-o"></span></div>
-                                <input name="email" type="text" class="form-control rounded-left" placeholder="Email" required>
+                                <input name="email" value="{{old('email')}}" type="text" class="form-control rounded-left" placeholder="Email">
+                                @if($errors->has('email'))
+                                    <p style="color:red">{{$errors->first('email')}}</p>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <div class="icon d-flex align-items-center justify-content-center"><span
                                         class="fa fa-lock"></span></div>
-                                <input name="password" type="password" class="form-control rounded-left" placeholder="Password"
-                                    required>
+                                <input name="password" value="{{old('password')}}" type="password" class="form-control rounded-left" placeholder="Password">
+                                    @if($errors->has('password'))
+                                        <p style="color:red">{{$errors->first('password')}}</p>
+                                    @elseif(Session::has('error'))
+                                        <p style="color:red">{{Session::get('error')}}</p>
+                                    @endif
                             </div>
                             <div class="form-group d-flex align-items-center">
                                 <div class="w-100 d-flex justify-content-end">
@@ -57,7 +70,7 @@
                             <div class="form-group mt-4">
                                 <div class="w-100 text-center">
                                     <p class="mb-1">Don't have an account? <a
-                                            href="{{ Route('customer.showRegister') }}">Sign Up</a></p>
+                                            href="{{ Route('user.showRegister') }}">Sign Up</a></p>
                                 </div>
                             </div>
                         </form>

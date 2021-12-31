@@ -24,7 +24,7 @@ class CartController extends Controller
         $request->session()->push('cart.foods', $food);
         $total_price = $food->price*$quanty;
         $request->session()->increment('cart.total_price', $total_price);
-        (new FlashMessage)->_notifyMsg($request, "Add to cart success!");
+        (new FlashMessage)->notifyMsg($request, "Add to cart success!");
         return back();
     }
     public function clear(HttpRequest $request) {

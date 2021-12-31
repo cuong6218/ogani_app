@@ -1,22 +1,25 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateCustomerRequest;
-use App\Http\Services\CustomerService;
+use App\Http\Requests\CreateLoginRequest;
+use App\Http\Requests\CreateRegisterRequest;
+use App\Http\Services\FlashMessage;
+use App\Http\Services\UserService;
 use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Laravel\Socialite\Facades\Socialite;
 
-class CustomerController extends BaseController
+class UserController extends BaseController
 {
-    public function __construct(CustomerService $customerService) {
-        $this->customerService = $customerService;
+    public function __construct(UserService $userService) {
+        $this->userService = $userService;
     }
     public function index() {
-        $customers = $this->customerService->getAll();
-        return view('admin.customer.index', compact('customers'));
+        $users = $this->userService->getAll();
+        return view('admin.user.index', compact('users'));
     }
     public function showLogin() {
         return view('ogani.user.login');
@@ -24,19 +27,25 @@ class CustomerController extends BaseController
     public function showRegister() {
         return view('ogani.user.register');
     }
-    public function register(CreateCustomerRequest $request){
-        $this->customerService->store($request);
-        return redirect()->route('customer.showLogin');
+    public function register(CreateRegisterRequest $request){
+        $this->userService->store($request);
+        (new FlashMessage)->notifyMsg($request, "Register success!");
+        return redirect()->route('user.showLogin');
     }
-    public function login(CreateCustomerRequest $request) {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+    public function login(CreateLoginRequest $request) {
+        $user = $this->userService->getUserByEmail($request->email);
+        if(Hash::check($request->password, $user->password)){
+            Auth::login($user);
+            $request->session()->remove('password');
+            (new FlashMessage)->notifyMsg($request, "Login success!");
             return redirect()->route('ogani.index');
         }
-        return redirect()->route('customer.showLogin');
+        (new FlashMessage)->notifyMsg($request, 'password is incorrect.', 'error');
+        return redirect()->route('user.showLogin');
     }
     public function logout(){
         Auth::logout();
-        return back();
+        return redirect()->route('user.showLogin');
     }
     public function loginOauth($drive) {
         return Socialite::driver($drive)->redirect();

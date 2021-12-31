@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
@@ -24,7 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $categories_header = Category::all();
+        $categories_header = [];
+        if (Schema::hasTable('categories')) {
+            $categories_header = Category::all();
+        }
         View::share('categories_header', $categories_header);
     }
 }
