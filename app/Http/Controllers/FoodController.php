@@ -8,6 +8,7 @@ use App\Http\Services\FlashMessage;
 use App\Http\Services\FoodService;
 use App\Models\Food;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FoodController extends Controller
 {
@@ -102,5 +103,8 @@ class FoodController extends Controller
         $this->foodService->destroy($id);
         Session::flash('error', 'Selected food was deleled!');
         return redirect()->route('food.index');
+    }
+    public function export() {
+        
     }
 }
