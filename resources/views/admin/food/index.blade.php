@@ -8,6 +8,7 @@
           <h4 class="card-title">Food Table</h4>
           <div class="d-flex">
             <a href="{{Route('food.add')}}" class="btn btn-sm ml-3 btn-success"> Add </a>
+            <a href="{{Route('food.export')}}" class="btn btn-sm ml-3 btn-info"> Export </a>
           </div>
         </div>
         <div class="table-responsive">

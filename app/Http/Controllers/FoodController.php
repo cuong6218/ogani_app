@@ -105,6 +105,10 @@ class FoodController extends Controller
         return redirect()->route('food.index');
     }
     public function export() {
-        
+        $foods = $this->foodService->getAll();
+        echo '<pre>';
+        print_r($foods);
+        die();
+        return redirect()->route('food.index');
     }
 }

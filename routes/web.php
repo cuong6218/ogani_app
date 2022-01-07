@@ -57,6 +57,7 @@ Route::prefix('/food')->group(function()
     Route::get('/{id}/edit', 'App\Http\Controllers\FoodController@edit')->name('food.edit');
     Route::post('/{id}/update', 'App\Http\Controllers\FoodController@update')->name('food.update');
     Route::get('/{id}/delete', 'App\Http\Controllers\FoodController@destroy')->name('food.delete');
+    Route::get('/export', 'App\Http\Controllers\FoodController@export')->name('food.export');
 });
 Route::prefix('/checkout')->group(function()
 {

@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-body">
         <div class="page-header flex-wrap">
-          <h4 class="card-title">Customer Table</h4>
+          <h4 class="card-title">user Table</h4>
           <div class="d-flex">
             
           </div>
@@ -22,13 +22,13 @@
               </tr>
             </thead>
             <tbody>
-              @forelse($customers as $key => $customer)
+              @forelse($users as $key => $user)
               <tr>
                 <td class="py-1">{{$key+1}}</td>
-                <td>{{$customer->name}}</td>
-                <td>{{$customer->phone}}</td>
-                <td>{{$customer->email}}</td>
-                <td>{{$customer->address}}</td>
+                <td>{{$user->name}}</td>
+                <td>{{$user->phone}}</td>
+                <td>{{$user->email}}</td>
+                <td>{{$user->address}}</td>
                 @empty
                   <td>No data</td>
               </tr>
