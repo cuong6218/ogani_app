@@ -14,7 +14,7 @@ class FoodRepo
     }
     public function getAll()
     {
-        return $this->food->select('*')->orderBy('id', 'desc')->paginate(8);
+        return $this->food->select('*')->orderBy('id', 'desc')->paginate(6);
     }
     public function all()
     {

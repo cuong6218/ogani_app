@@ -15502,3 +15502,6 @@ dl {
 .update-button {
   cursor: pointer;
 }
+#pagination_sample{
+  margin-left: 50px;
+}

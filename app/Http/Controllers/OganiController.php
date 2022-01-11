@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Services\FoodService;
 use App\Http\Services\CategoryService;
 use App\Http\Services\FlashMessage;
-use App\Models\Food;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 
 class OganiController extends BaseController
 {

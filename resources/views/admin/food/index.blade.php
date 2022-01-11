@@ -51,8 +51,26 @@
           </table>
         </div>
       </div>
+      <nav aria-label="Page navigation example " id="pagination_sample">
+        <ul class="pagination">
+          <li class="page-item @if($foods->onFirstPage()) disabled @endif">
+            <a class="page-link " href="{{$foods->previousPageUrl()}}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          @foreach($foods->getUrlRange(1,$foods->lastPage()) as $page_number => $page_url)
+            <li class="page-item"><a class="page-link" @if($foods->currentPage() == $page_number) style="color:red;" @endif href="{{$page_url}}">{{$page_number}}</a></li>
+          @endforeach
+          <li class="page-item @if($foods->currentPage() == $foods->lastPage()) disabled @endif">
+            <a class="page-link" href="{{$foods->nextPageUrl();}}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
- 
 </div>
 @endsection

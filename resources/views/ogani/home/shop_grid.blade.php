@@ -234,7 +234,7 @@
                 <div class="product__pagination">
                     <a @if($foods->onFirstPage()) class="disabled" @endif href="{{$foods->previousPageUrl()}}"><i class="fa fa-long-arrow-left"></i></a>
                     @foreach($foods->getUrlRange(1,$foods->lastPage()) as $page_number => $page_url)
-                    <a href="{{$page_url}}">{{$page_number}}</a>
+                    <a @if($foods->currentPage() == $page_number) style="background-color: #7FAD39; color: white" @endif  href="{{$page_url}}">{{$page_number}}</a>
                     @endforeach                  
                     <a @if($foods->currentPage() == $foods->lastPage()) class="disabled" @endif href="{{$foods->nextPageUrl();}}" ><i class="fa fa-long-arrow-right"></i></a>
                 </div>
