@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use App\Models\Food;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -15,7 +16,7 @@ class FoodFactory extends Factory
      */
     public function definition()
     {
-
+        $cate_ids = Category::all(['id']);
         $name = $this->faker->randomElement(['Pig', 'Tomato', 'Pork', 'Apple', 'Orange']);
         $price = $this->faker->randomFloat(1, 1, 10);
         $image_list = [
@@ -25,7 +26,7 @@ class FoodFactory extends Factory
             "file-dump/thumb-" . rand(1, 4) . ".jpg",
         ];
         $image_url = $this->faker->randomElement($image_list);
-        $cate_id = $this->faker->randomDigitNot('/[1-10]/');
+        $cate_id = $this->faker->randomElement($cate_ids);
         return [
             'name' => $name,
             'price' => $price,

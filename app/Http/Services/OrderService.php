@@ -61,4 +61,7 @@ class OrderService
         $order->status = 'FAIL';
         $this->orderRepo->save($order);
     }
+    public function getTotalPrice() {
+        return $this->orderRepo->getTotalPrice();
+    }
 }

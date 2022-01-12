@@ -5,7 +5,7 @@
     <div class="card">
       <div class="card-body">
         <div class="page-header flex-wrap">
-          <h4 class="card-title">Food Table</h4>
+          <h4 class="card-title">Food Table ({{$total}} products)</h4>
           <div class="d-flex">
             <a href="{{Route('food.add')}}" class="btn btn-sm ml-3 btn-success"> Add </a>
             <a href="{{Route('food.export')}}" class="btn btn-sm ml-3 btn-info"> Export </a>
@@ -51,8 +51,10 @@
           </table>
         </div>
       </div>
+      
       <nav aria-label="Page navigation example " id="pagination_sample">
-        <ul class="pagination">
+        {{$foods->links()}}
+        {{-- <ul class="pagination">
           <li class="page-item @if($foods->onFirstPage()) disabled @endif">
             <a class="page-link " href="{{$foods->previousPageUrl()}}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
@@ -60,7 +62,7 @@
             </a>
           </li>
           @foreach($foods->getUrlRange(1,$foods->lastPage()) as $page_number => $page_url)
-            <li class="page-item"><a class="page-link" @if($foods->currentPage() == $page_number) style="color:red;" @endif href="{{$page_url}}">{{$page_number}}</a></li>
+          <li class="page-item"><a class="page-link" @if($foods->currentPage() == $page_number) style="color:red;" @endif href="{{$page_url}}">{{$page_number}}</a></li>
           @endforeach
           <li class="page-item @if($foods->currentPage() == $foods->lastPage()) disabled @endif">
             <a class="page-link" href="{{$foods->nextPageUrl();}}" aria-label="Next">
@@ -68,7 +70,7 @@
               <span class="sr-only">Next</span>
             </a>
           </li>
-        </ul>
+        </ul> --}}
       </nav>
     </div>
   </div>

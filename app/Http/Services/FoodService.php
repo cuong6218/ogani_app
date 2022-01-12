@@ -65,4 +65,7 @@ class FoodService
     public function getByCateId($id) {
         return $this->foodRepo->getByCateId($id);
     }
+    public function getExportData() {
+        return $this->foodRepo->getExportData();
+    }
 }

@@ -29,9 +29,9 @@ class OrderController extends Controller
             $this->orderService->store($request);
             $request->session()->remove('cart.foods');
             $request->session()->remove('cart.total_price');
-            (new FlashMessage)->_notifyMsg($request, "You place order success!", "success" );
+            (new FlashMessage)->notifyMsg($request, "You place order success!", "success" );
         } else {
-            (new FlashMessage)->_notifyMsg($request, "Please choose your foods!", "error" );
+            (new FlashMessage)->notifyMsg($request, "Please choose your foods!", "error" );
         }
         return redirect()->route('ogani.index');
     }

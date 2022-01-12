@@ -2,22 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FoodExport;
 use App\Http\Requests\CreateFoodRequest;
 use App\Http\Services\CategoryService;
 use App\Http\Services\FlashMessage;
 use App\Http\Services\FoodService;
-use App\Models\Food;
 use Illuminate\Support\Facades\Session;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Excel;
 
 class FoodController extends Controller
 {
     protected $foodService;
     public function __construct(FoodService $foodService, 
-                                CategoryService $categoryService)
+                                CategoryService $categoryService,
+                                Excel $excel)
     {
         $this->foodService = $foodService;
         $this->categoryService = $categoryService;
+        $this->excel = $excel;
     }
     /**
      * Display a listing of the resource.
@@ -26,8 +28,10 @@ class FoodController extends Controller
      */
     public function index()
     {
+        $total = 0;
         $foods = $this->foodService->getAll();
-        return view('admin.food.index', compact('foods'));
+        if ($foods != NULL) $total = $foods->total();
+        return view('admin.food.index', compact('foods', 'total'));
     }
 
     /**
@@ -107,7 +111,7 @@ class FoodController extends Controller
         return redirect()->route('food.index');
     }
     public function export() {
-        $foods = $this->foodService->getAll();
-        return redirect()->route('food.index');
+        return $this->excel->download(new FoodExport($this->foodService), 
+                                    'food.xlsx');
     }
 }

@@ -24,5 +24,8 @@ class OrderRepo
     {
         return $this->order->findOrFail($id);
     }
-
+    public function getTotalPrice() {
+        return $this->order->where('status', '=', 'SUCESS')
+                            ->sum('orders.total_price');
+    }
 }

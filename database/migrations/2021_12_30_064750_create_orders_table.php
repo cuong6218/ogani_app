@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->integer('order_id');
             $table->float('total_price');
             $table->integer('user_id');
-            $table->longText('notes');
-            $table->string('status');
+            $table->longText('notes')->nullable();
+            $table->string('status')->comment('Include: NEW, PENDING, SUCCESS, FAIL');
             $table->timestamps();
         });
     }

@@ -42,6 +42,9 @@
           </table>
         </div>
       </div>
+      <nav aria-label="Page navigation example " id="pagination_sample">
+        {{$categories->links()}}
+      </nav>
     </div>
   </div>
 
