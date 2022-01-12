@@ -210,7 +210,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    @foreach($foods->items()?? [] as $food)
+                    @foreach($foods->items() ?? [] as $food)
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="product__item">
                             <div class="product__item__pic set-bg" data-setbg="{{asset('storage/'.$food->image_url)}}">

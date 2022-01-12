@@ -27,7 +27,7 @@ Route::prefix('/user')->group(function()
     Route::get('/{drive}/callback', 'App\Http\Controllers\UserController@callback')->name('user.callback');
 Route::get('/list', 'App\Http\Controllers\UserController@index')->name('user.index');
 });
-Route::prefix('/ogani')->group(function()
+Route::prefix('/')->group(function()
     {
         Route::get('/', 'App\Http\Controllers\OganiController@index')->name('ogani.index');
         Route::get('/shop-grid', 'App\Http\Controllers\OganiController@shopGrid')->name('ogani.shop-grid');
@@ -57,6 +57,7 @@ Route::prefix('/food')->group(function()
     Route::get('/{id}/edit', 'App\Http\Controllers\FoodController@edit')->name('food.edit');
     Route::post('/{id}/update', 'App\Http\Controllers\FoodController@update')->name('food.update');
     Route::get('/{id}/delete', 'App\Http\Controllers\FoodController@destroy')->name('food.delete');
+    Route::get('/{id}/show', 'App\Http\Controllers\FoodController@show')->name('food.show');
     Route::get('/export', 'App\Http\Controllers\FoodController@export')->name('food.export');
 });
 Route::prefix('/checkout')->group(function()

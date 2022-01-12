@@ -55,10 +55,8 @@
                         <p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam
                             vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet
                             quam vehicula elementum sed sit amet dui. Proin eget tortor risus.</p>
-                        <form id="add-to-cart-form" action="{{Route('cart.add-to-cart')}}" method="POST">
-                            @csrf
-                            <input type="hidden" name="id" value="{{$food->id}}" />
-                        
+                        <form id="add-to-cart-form" action="{{Route('cart.add-to-cart', $food->id)}}" method="POST">
+                            @csrf                        
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">

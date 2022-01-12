@@ -39,7 +39,7 @@ class FoodRepo
         ->orWhere('foods.name', 'like', '%'.$name.'%')->paginate(6);
     }
     public function getByCateId($id){
-        return $this->food->select('foods.id', 'foods.name', 'foods.image_url', 'foods.price')
+        return $this->food->select('foods.id', 'foods.name as food_name', 'foods.image_url', 'foods.price')
                             ->where('cate_id', '=', $id)->paginate(6);
     }
 }

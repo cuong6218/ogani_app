@@ -62,7 +62,9 @@ class FoodController extends Controller
      */
     public function show($id)
     {
-        //
+        $food = $this->foodService->getFood($id);
+        // dd($food->id);
+        return view('ogani.home.shop_detail', compact('food'));
     }
 
     /**
@@ -106,9 +108,6 @@ class FoodController extends Controller
     }
     public function export() {
         $foods = $this->foodService->getAll();
-        echo '<pre>';
-        print_r($foods);
-        die();
         return redirect()->route('food.index');
     }
 }

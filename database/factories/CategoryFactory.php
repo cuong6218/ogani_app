@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 class CategoryFactory extends Factory
 {
     protected $model = Category::class;
@@ -15,9 +14,9 @@ class CategoryFactory extends Factory
      */
     public function definition()
     {
-        $name = ['Vegestable', 'Seafood', 'Seeds', 'Meat', 'FastFood'];
+        $name = $this->faker->randomElement(['Vegestable', 'Seafood', 'Seeds', 'Meat', 'FastFood', 'Cake']);
         return [
-            'name' => $name[rand(0, count($name)-1)],
+            'name' => $name
         ];
     }
 }

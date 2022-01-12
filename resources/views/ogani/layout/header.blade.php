@@ -125,24 +125,24 @@
         <div class="row">
             <div class="col-lg-3">
                 <div class="header__logo">
-                    <a href="./index.html"><img src="template/img/logo.png" alt=""></a>
+                    <a href="{{Route('ogani.index')}}"><img src="template/img/logo.png" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-6">
                 <nav class="header__menu">
                     <ul>
-                        <li class="active"><a href="{{Route('ogani.index')}}">Home</a></li>
-                        <li><a href="{{Route('ogani.shop-grid')}}">Shop</a></li>
-                        <li><a href="#">Pages</a>
+                        <li @if(checkCurrentUrl('ogani.index')) class="active" @endif ><a href="{{Route('ogani.index')}}">Home</a></li>
+                        <li @if(checkCurrentUrl('cart.list')) class="active" @endif ><a href="{{Route('cart.list')}}">Shoping Cart</a></li>
+                        {{-- <li><a href="{{Route('ogani.shop-grid')}}">Shop</a></li> --}}
+                        {{-- <li><a href="#">Pages</a>
                             <ul class="header__menu__dropdown">
                                 <li><a href="./shop-details.html">Shop Details</a></li>
-                                <li><a href="{{Route('cart.list')}}">Shoping Cart</a></li>
                                 <li><a href="./checkout.html">Check Out</a></li>
                                 <li><a href="./blog-details.html">Blog Details</a></li>
                             </ul>
-                        </li>
-                        <li><a href="{{Route('ogani.blog')}}">Blog</a></li>
-                        <li><a href="{{Route('ogani.contact')}}">Contact</a></li>
+                        </li> --}}
+                        <li @if(checkCurrentUrl('ogani.blog')) class="active" @endif><a href="{{Route('ogani.blog')}}">Blog</a></li>
+                        <li @if(checkCurrentUrl('ogani.contact')) class="active" @endif><a href="{{Route('ogani.contact')}}">Contact</a></li>
                     </ul>
                 </nav>
             </div>
@@ -164,7 +164,7 @@
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
-<section class="hero @if(\Request::route()->getName() == 'cart.list' || \Request::route()->getName() == 'ogani.search') hero-normal @endif">
+<section class="hero @if(checkCurrentUrl('cart.list') || checkCurrentUrl('ogani.search')) hero-normal @endif">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -175,7 +175,7 @@
                     </div>
                     <ul>
                         @foreach($categories_header as $category)
-                        <li><a href="{{Route('category.show', $category->id)}}">{{$category->name}}</a></li>
+                            <li><a href="{{Route('category.show', $category->id)}}">{{$category->name}}</a></li>
                         @endforeach 
                     </ul>
                 </div>
@@ -203,7 +203,7 @@
                         </div>
                     </div>
                 </div>
-                @if(\Request::route()->getName() != 'cart.list' && \Request::route()->getName() != 'ogani.search')
+                @if(!checkCurrentUrl('cart.list') && !checkCurrentUrl('ogani.search'))
                 <div class="hero__item set-bg" data-setbg="template/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>FRUIT FRESH</span>

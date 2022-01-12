@@ -15,18 +15,22 @@ class FoodFactory extends Factory
      */
     public function definition()
     {
-        $name = ['Pig', 'Tomato', 'Pork', 'Apple', 'Orange'];
-        $image_url = [
-            "file-dump/pd-".rand(1,6).".jpg",
-            "file-dump/product-".rand(1,12).".jpg",
-            "file-dump/product-details-".rand(1,5).".jpg",
-            "file-dump/thumb-".rand(1,4).".jpg",
+
+        $name = $this->faker->randomElement(['Pig', 'Tomato', 'Pork', 'Apple', 'Orange']);
+        $price = $this->faker->randomFloat(1, 1, 10);
+        $image_list = [
+            "file-dump/pd-" . rand(1, 6) . ".jpg",
+            "file-dump/product-" . rand(1, 12) . ".jpg",
+            "file-dump/product-details-" . rand(1, 5) . ".jpg",
+            "file-dump/thumb-" . rand(1, 4) . ".jpg",
         ];
+        $image_url = $this->faker->randomElement($image_list);
+        $cate_id = $this->faker->randomDigitNot('/[1-10]/');
         return [
-            'name' => $name[rand(0, count($name) -1)],
-            'price' => round(rand(1,20)/rand(1,20), 2),
-            'image_url' => $image_url[rand(0, count($image_url) -1)],
-            'cate_id' => rand(1,10),
+            'name' => $name,
+            'price' => $price,
+            'image_url' => $image_url,
+            'cate_id' => $cate_id,
         ];
     }
 }
