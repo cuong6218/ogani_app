@@ -24,7 +24,7 @@ class OrderService
         $order = new Order();
         $data['user_id'] = $request->user_id;
         $data['total_price'] = $request->total_price;
-        $data['order_id'] = rand(100000, 999999);
+        $data['order_id'] = uniqid();
         $data['notes'] = $request->notes;
         $data['status'] = 'NEW';
         $order->fill($data);

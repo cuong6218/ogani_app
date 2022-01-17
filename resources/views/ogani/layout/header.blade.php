@@ -164,7 +164,10 @@
 <!-- Header Section End -->
 
 <!-- Hero Section Begin -->
-<section class="hero @if(checkCurrentUrl('cart.list') || checkCurrentUrl('ogani.search')) hero-normal @endif">
+<section class="hero @if(checkCurrentUrl('cart.list') || 
+                        checkCurrentUrl('ogani.search') ||
+                        checkCurrentUrl('ogani.contact') ||
+                        checkCurrentUrl('ogani.blog')) hero-normal @endif">
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
@@ -203,7 +206,10 @@
                         </div>
                     </div>
                 </div>
-                @if(!checkCurrentUrl('cart.list') && !checkCurrentUrl('ogani.search'))
+                @if(!checkCurrentUrl('cart.list') && 
+                    !checkCurrentUrl('ogani.search') &&
+                    !checkCurrentUrl('ogani.blog') &&
+                    !checkCurrentUrl('ogani.contact'))
                 <div class="hero__item set-bg" data-setbg="template/img/hero/banner.jpg">
                     <div class="hero__text">
                         <span>FRUIT FRESH</span>
