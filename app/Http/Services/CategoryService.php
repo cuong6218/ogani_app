@@ -4,8 +4,8 @@
 namespace App\Http\Services;
 
 use App\Http\Repositories\CategoryRepo;
+use App\Http\Requests\CreateCategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
 class CategoryService
 {
@@ -14,36 +14,37 @@ class CategoryService
     {
         $this->cateRepo = $cateRepo;
     }
-    public function getAll($item_number = 5)
+    public function getAll()
     {
-        return $this->cateRepo->getAll($item_number);
+        return $this->cateRepo->getAll();
     }
-    public function all()
+    public function getAllWithPaginate($item_number = 5)
     {
-        return $this->cateRepo->all();
+        return $this->cateRepo->getAllWithPaginate($item_number);
     }
-    public function store(Request $request)
+    public function store(CreateCategoryRequest $request)
     {
         $category = new Category();
         $data = $request->all();
         $category->fill($data);
         $this->cateRepo->save($category);
     }
-    public function getCategory($id)
+    public function getDetail($id)
     {
-        return $this->cateRepo->getCategory($id);
+        return $this->cateRepo->getDetail($id);
     }
-    public function update(Request $request, $id)
+    public function update(CreateCategoryRequest $request, $id)
     {
-        $category = $this->cateRepo->getCategory($id);
+        $category = $this->cateRepo->getDetail($id);
         $category->name = $request->name;
         $this->cateRepo->save($category);
     }
     public function destroy($id)
     {
-        $this->cateRepo->destroy($id);
+        $this->cateRepo->delete($id);
     }
-    public function getByName($name) {
+    public function getByName($name)
+    {
         return $this->cateRepo->getByName($name);
     }
 }

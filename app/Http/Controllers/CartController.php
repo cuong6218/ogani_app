@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Services\FlashMessage;
 use App\Http\Services\FoodService;
 use Illuminate\Http\Request as HttpRequest;
-use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {

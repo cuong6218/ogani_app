@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCategoryRequest;
 use App\Http\Services\CategoryService;
 use App\Http\Services\FoodService;
-use App\Notifications\InvoicePaid;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
@@ -25,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = $this->categoryService->getAll();
+        $categories = $this->categoryService->getAllWithPaginate();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -72,7 +70,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = $this->categoryService->getCategory($id);
+        $category = $this->categoryService->getDetail($id);
         
         return view('admin.category.update', compact('category'));
     }

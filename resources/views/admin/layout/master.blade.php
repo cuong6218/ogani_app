@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="admin/assets/vendors/select2/select2.min.css" />
     <link rel="stylesheet" href="admin/assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css" />
     <link rel="stylesheet" href="admin/assets/css/style.css" />
+    <link rel="stylesheet" href="admin/assets/css/custom.css" />
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     <link rel="shortcut icon" href="admin/assets/images/favicon.png" />
   </head>
@@ -60,7 +61,7 @@
     
     <script src="admin/assets/js/select2.js"></script>
     <script src="admin/assets/js/file-upload.js"></script>
-    <script src="admin/assets/js/main.js"></script>
+    <script src="admin/assets/js/custom.js"></script>
     <!-- End custom js for this page -->
     
   </body>

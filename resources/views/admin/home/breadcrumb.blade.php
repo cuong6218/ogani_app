@@ -1,3 +1,15 @@
+@if(Session::get("error"))
+<div class="alert alert-danger" id="alert-message">
+  <span class="alert-message">{{Session::get("error")}}</span>
+  <span class="closebtn pull-right" onclick="this.parentElement.style.display='none';">&times;</span>  
+  
+</div>
+@elseif(Session::get("success"))
+<div class="alert alert-success" id="alert-message">
+  <span class="alert-message">{{Session::get("success")}}</span>
+    <span class="closebtn pull-right" onclick="this.parentElement.style.display='none';">&times;</span>
+  </div>
+@endif
 <div class="page-header flex-wrap">
     <h3 class="mb-0"> Breeze <span class="pl-0 h6 pl-sm-2 text-muted d-inline-block">Your web analytics dashboard template.</span>
     </h3>
@@ -8,15 +20,3 @@
         </ol>
     </nav>
 </div>
-
-@if(Session::has('success'))
-<div class="alert alert-success alert-dismissable">
-  <button class="btn btn-icon close-alert" data-dismiss="alert"><i class="mdi mdi-close"></i></button>
-  <p class="alert-message text-light">{{Session::get('success')}}</p>
-</div>
-@elseif(Session::has('error'))
-<div class="alert alert-danger alert-dismissable">
-  <button class="btn btn-icon close-alert" data-dismiss="alert"><i class="mdi mdi-close"></i></button>
-  <p class="alert-message text-light">{{Session::get('error')}}</p>
-</div>
-@endif

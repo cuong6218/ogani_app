@@ -43,7 +43,7 @@
         </div>
       </div>
       <nav aria-label="Page navigation example " id="pagination_sample">
-        {{$categories->links()}}
+        {{$categories->onEachSide(3)->links()}}
       </nav>
     </div>
   </div>

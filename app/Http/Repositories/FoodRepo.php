@@ -1,20 +1,21 @@
 <?php
 
-
 namespace App\Http\Repositories;
 
 use App\Models\Food;
+use App\Http\Repositories\BaseRepo;
 
-class FoodRepo
+class FoodRepo extends BaseRepo
 {
     protected $food;
     public function __construct(Food $food)
     {
+        parent::__construct($food);
         $this->food = $food;
     }
     public function getAll()
     {
-        return $this->food->select('*')->orderBy('id', 'desc')->paginate(6)->onEachSide(2);
+        return $this->food->select('*')->orderBy('id', 'desc')->paginate(6);
     }
     public function all()
     {
@@ -32,19 +33,23 @@ class FoodRepo
     {
         $this->food->destroy($id);
     }
-    public function searchCategoryOrFood($name) {
-        return $this->food->select('foods.id', 'foods.name as food_name', 'foods.image_url', 'foods.price', 'categories.name as cate_name')->join('categories', function ($join){
-            $join->on('foods.cate_id', '=', 'categories.id');
-        })->where('categories.name', 'like', '%'.$name.'%')
-        ->orWhere('foods.name', 'like', '%'.$name.'%')->paginate(6);
+    public function searchCategoryOrFood($name)
+    {
+        return $this->food->select('foods.id', 'foods.name as food_name', 'foods.image_url', 'foods.price', 'categories.name as cate_name')
+            ->join('categories', function ($join) {
+                $join->on('foods.cate_id', '=', 'categories.id');
+            })->where('categories.name', 'like', '%' . $name . '%')
+            ->orWhere('foods.name', 'like', '%' . $name . '%')->paginate(6);
     }
-    public function getByCateId($id){
+    public function getByCateId($id)
+    {
         return $this->food->select('foods.id', 'foods.name as food_name', 'foods.image_url', 'foods.price')
-                            ->where('cate_id', '=', $id)->paginate(6);
+            ->where('cate_id', '=', $id)->paginate(6);
     }
-    public function getExportData() {
+    public function getExportData()
+    {
         return $this->food->join('categories', 'foods.cate_id', '=', 'categories.id')
-                        ->select('foods.name', 'categories.name as category_name', 'foods.price', 'foods.created_at')
-                        ->get();
+            ->select('foods.name', 'categories.name as category_name', 'foods.price', 'foods.created_at')
+            ->get();
     }
 }

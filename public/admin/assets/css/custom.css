@@ -1,0 +1,23 @@
+#pagination_sample {
+    margin-left: 50px;
+}
+#alert-message {
+    position: fixed;
+    top: 80px;
+    right: 10px;
+    width: 30%;
+    z-index: 1000;
+    border-radius: 0px;
+}
+.alert-message {
+    color: white;
+    font-size: 1em;
+}
+.closebtn {
+    color: white;
+    font-size: 1em;
+}
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
